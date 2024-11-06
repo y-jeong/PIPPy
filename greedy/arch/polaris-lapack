@@ -1,0 +1,2 @@
+FCFLAGS += -D_USE_LAPACK
+EX = forward-lapack.x

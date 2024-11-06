@@ -1,0 +1,20 @@
+CUDA=${NVIDIA_PATH}/cuda
+
+GPULIB=$(PIPPY_ROOT_DIR)/accel
+
+FC = gfortran
+FCFLAGS = -g -ffree-form -O3
+
+FCFLAGS += -D_USE_GPULIB -I$(GPULIB)/include
+
+CPP = cpp -P -traditional
+CPPFLAGS =
+
+LD = $(FC)
+LDFLAGS = $(GPULIB)/include/libgpu_fc_interface.o
+LIB = -L$(GPULIB)/lib -lgpu 
+LIB += -L$(CUDA)/lib64 -lcudart
+#LIB += -lnvToolsExt
+LIB += -lstdc++
+
+EX = pip-gfortran.x

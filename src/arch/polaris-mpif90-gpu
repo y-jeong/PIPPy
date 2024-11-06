@@ -1,0 +1,23 @@
+CUDA=${NVIDIA_PATH}/cuda
+
+GPULIB=$(PIPPY_ROOT_DIR)/accel
+
+FC = mpif90
+#FCFLAGS = -g -ffree-form -O3
+FCFLAGS = -g -O3 -Mpreprocess
+
+FCFLAGS += -D_USE_GPU -D_USE_GPULIB -I$(GPULIB)/include
+#FCFLAGS += -D_DEBUG_GPU
+
+CPP = cpp -P -traditional
+CPPFLAGS =
+
+LD = $(FC)
+LDFLAGS = $(GPULIB)/include/libgpu_fc_interface.o
+#LDFLAGS += -nostartfiles
+LIB = -L$(GPULIB)/lib -lgpu 
+LIB += -L$(CUDA)/lib64 -lcudart
+#LIB += -lnvToolsExt
+LIB += -lstdc++
+
+EX = pip-gpu.x

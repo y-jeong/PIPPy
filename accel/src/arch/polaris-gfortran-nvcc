@@ -1,0 +1,18 @@
+INSTALL = ..
+
+#CUDA = ${NVIDIA_PATH}/cuda
+
+FC = gfortran
+FCFLAGS = -g -O3
+
+CXX = g++
+CXXFLAGS = -g -O3
+
+CXXFLAGS += -D_USE_GPU -D_GPU_CUDA
+CXXFLAGS += -I${NVIDIA_PATH}/cuda/include 
+#CXXFLAGS += -D_CUDA_NVTX
+
+CUDA_CXXFLAGS += -D_USE_GPU -D_GPU_CUDA
+#CUDA_CXXFLAGS += -D_CUDA_NVTX
+
+LD = $(FC)
